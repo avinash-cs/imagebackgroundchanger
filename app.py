@@ -59,15 +59,43 @@ def home():
 #         return render_template('home.html',org_img_name=filename,rembg_img_name=rembg_img_name)
 
 
+# @app.route('/remback', methods=['POST'])
+# def remback():
+#     file = request.files['file']
+#     backfile = request.files['backfile']
+
+#     if file and allowed_file(file.filename):
+#         filename = secure_filename(file.filename)
+#         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+#         # Specify the path to your custom background image
+#         custom_background_path = 'blackjpg.jpg'
+# # backfile
+#         rembg_img_name = filename.split('.')[0] + "_rembg.png"
+#         final_img_name = filename.split('.')[0] + "_final.png"
+
+#         remove_background(os.path.join(app.config['UPLOAD_FOLDER'], filename),
+#                           os.path.join(app.config['UPLOAD_FOLDER'], rembg_img_name),
+#                           custom_background_path)
+
+#         return render_template('home.html', org_img_name=filename, rembg_img_name=rembg_img_name, final_img_name=final_img_name)
+
 @app.route('/remback', methods=['POST'])
 def remback():
     file = request.files['file']
+    backfile = request.files['backfile']
+
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-        # Specify the path to your custom background image
-        custom_background_path = 'blackjpg.jpg'
+        if backfile and allowed_file(backfile.filename):
+            back_filename = secure_filename(backfile.filename)
+            backfile.save(os.path.join(app.config['UPLOAD_FOLDER'], back_filename))
+            custom_background_path = os.path.join(app.config['UPLOAD_FOLDER'], back_filename)
+        else:
+            # Use a default background image if no backfile was uploaded
+            custom_background_path = 'blackjpg.jpg'  # You can specify a default image here
 
         rembg_img_name = filename.split('.')[0] + "_rembg.png"
         final_img_name = filename.split('.')[0] + "_final.png"
@@ -77,7 +105,6 @@ def remback():
                           custom_background_path)
 
         return render_template('home.html', org_img_name=filename, rembg_img_name=rembg_img_name, final_img_name=final_img_name)
-
 
 
 

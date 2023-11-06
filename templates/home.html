@@ -13,7 +13,7 @@
         /* width: 800px; */
         background-color: orange;
         margin: auto;
-        color: #FFFFFF;
+        color: black;
         padding: 10px 0px 10px 0px;
         text-align: center;
         border-radius: 15px 15px 0px 0px;
@@ -21,11 +21,11 @@
     }
 
     .main-form {
-        /* width: 800px; */
+        width: 60%;
         margin: auto;
         background-color: orange;
        padding:30px;
-        color: #FFFFFF;
+        color: black!important;
     }
 
     img {
@@ -34,6 +34,35 @@
         height: auto;
         width: auto;
     }
+    label{
+        display: block!important;
+        text-align: left;
+    }
+    .row .col{
+        
+    }
+    @media only screen and (max-width: 767px) {
+        .main-form {width:100%}
+        .text-center{     text-align: left!important;}
+
+
+
+}
+
+form{
+    width: 80%;
+    margin: 10%;
+    background-color: orange;
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 0;
+}
+.nwss{
+    background-color: orange;margin: 50px;border-radius: 20px;padding: 20px;
+}
+.nwss img{
+    display: block;margin-left: auto;margin-right: auto;
+}
 </style>
 
 
@@ -50,34 +79,38 @@
 </head>
 
 <body>
-
-    <div class='regform mt-3'>
-        <h1>Background Changer</h1>
-    </div>
-
     <form action='/remback' class='main-form' method="POST" enctype="multipart/form-data">
+        <fieldset >
+          <legend>Background Changer</legend>
+          <div class="mb-3">
+            <label for="disabledTextInput" class="form-label">Select an image Whose background has to be modified</label>
+            <input class="form-control" type="file" id="file" name='file' accept="image/*" capture="camera" style="margin-top:10px;margin-bottom:10px;">
 
-        <div class='text-center'>
-            <!-- <input type="file" id="file" name='file' style="margin-top:10px;margin-bottom:10px;"> -->
-            <!-- <input type="file" id="file" name='file' capture="camera" style="margin-top:10px;margin-bottom:10px;"> -->
-            <input type="file" id="file" name='file' accept="image/*" capture="camera" style="margin-top:10px;margin-bottom:10px;">
+          </div>
+          <div class="mb-3">
+            <label for="disabledSelect" class="form-label">Select a Background Picture</label>
+            <input class="form-control" type="file" id="file" name='backfile' accept="image/*"  style="margin-top:10px;margin-bottom:10px;">
+           
+          </div>
+         
+          <button type="submit" class="btn btn-success">Submit</button>
+        </fieldset>
+      </form>
 
-            <button type='submit' class='btn btn-success'>Submit
-            </button>
-        </div>
 
-    </form>
+
+   
     {% if rembg_img_name %}
     <div class="row" style="margin-top:10px;margin-bottom:10px;">
     
-        <div class="col text-center" style="background-color: orange;margin: 50px;border-radius: 20px;padding: 20px;">
-            <h2 style="color: #FFFFFF;">Original Image</h2>
-            <img src='../static/uploads/{{ org_img_name }}' style="display: block;margin-left: auto;margin-right: auto;">
+        <div class="col text-center nwss" >
+            <h2 style="color: black;">Original Image</h2>
+            <img src='../static/uploads/{{ org_img_name }}' >
         </div>
     
-        <div class="col text-center" style="background-color: orange;margin: 50px;border-radius: 20px;padding: 20px;">
-            <h2 style="color: #FFFFFF;">Image with Background Removed</h2>
-            <img src='../static/uploads/{{ rembg_img_name }}' style="display: block;margin-left: auto;margin-right: auto;">
+        <div class="col text-center nwss" >
+            <h2 style="color: black;">Image with Background Removed</h2>
+            <img src='../static/uploads/{{ rembg_img_name }}' >
         </div>
     
        
