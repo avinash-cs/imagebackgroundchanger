@@ -1,8 +1,8 @@
  {
      "builds": [
          {
-             "src": "app.py",
-             "use": "@vercel/python"
+             "src": "/",
+             "use": "@vercel/builders/now-python"
          }
      ],
      "routes": [
@@ -10,5 +10,8 @@
              "src": "/(.*)",
              "dest": "app.py"
          }
-     ]
+     ],
+  "env": {
+    "PYTHONUNBUFFERED": "true"
+  }
  }
